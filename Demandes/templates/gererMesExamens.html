@@ -1,0 +1,297 @@
+{% extends "accueil.html" %}
+{% load static %}
+
+
+{% block contenu %}
+
+<div class="section">
+<div class="section">    
+<div class="section">
+    
+<div class="row">
+    <div class="col s12 m12">
+      <div class="card blue darken-3">
+        <div class="card-content black-text">
+          <span class="card-title">LISTE DES EXAMENS</span>
+            <ul class="collapsible">
+              <!-- IRM -->
+               <li>
+                  <div class="collapsible-header machine"><i class="material-icons right machine">filter_drama</i>IRM </div>
+                    <div class="collapsible-body">
+                      <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header region"><i class="material-icons">filter_drama</i>tete et cou</div>
+                            {% for examen in listeExamens %}
+                                        {% if examen.machine == "IRM" %}
+                                          {% if examen.region == "tete et cou" %}
+                                              <div class="collapsible-body  examen  red lighten-2 green" machine="{{examen.machine}}" region = "{{examen.region}}" validationRequise="{{examen.validationRequise}}" realise="{{examen.realise}}"><span>{{examen.intitule}}</span></div>
+                                          {% endif %}
+                                        {% endif %}
+                            {% endfor %}
+                        </li>
+                      </ul>   
+                      <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header region"><i class="material-icons">filter_drama</i>moelle</div>
+                            {% for examen in listeExamens %}
+                                        {% if examen.machine == "IRM" %}
+                                          {% if examen.region == "moelle" %}
+                                              <div class="collapsible-body examen  red lighten-2 green" machine="{{examen.machine}}" region = "{{examen.region}}" validationRequise="{{examen.validationRequise}}" realise="{{examen.realise}}"><span>{{examen.intitule}}</span></div>
+                                          {% endif %}
+                                        {% endif %}
+                            {% endfor %}
+                        </li>
+                      </ul>
+                      <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header region"><i class="material-icons">filter_drama</i>abdomen et pelvis 
+                          </div>
+                            {% for examen in listeExamens %}
+                                        {% if examen.machine == "IRM" %}
+                                          {% if examen.region == "abdomen et pelvis" %}
+                                              <div class="collapsible-body  examen  red lighten-2 green" machine="{{examen.machine}}" region = "{{examen.region}}" validationRequise="{{examen.validationRequise}}" realise="{{examen.realise}}"><span>{{examen.intitule}}</span></div>
+                                          {% endif %}
+                                        {% endif %}
+                            {% endfor %}
+                        </li>
+                      </ul>
+                      <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header region"><i class="material-icons">filter_drama</i>ostéo-articulaire 
+                          </div>
+                            {% for examen in listeExamens %}
+                                        {% if examen.machine == "IRM" %}
+                                          {% if examen.region == "osteo" %}
+                                              <div class="collapsible-body  examen  red lighten-2 green" machine="{{examen.machine}}" region = "{{examen.region}}" validationRequise="{{examen.validationRequise}}" realise="{{examen.realise}}"><span>{{examen.intitule}}</span></div>
+                                          {% endif %}
+                                        {% endif %}
+                            {% endfor %}
+                        </li>
+                      </ul>
+                  </div>
+
+               </li>
+              <!-- scanner -->
+                <li>
+                  <div class="collapsible-header machine"><i class="material-icons right machine">filter_drama</i>scanner </div>
+                    <div class="collapsible-body">
+                      <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header region"><i class="material-icons">filter_drama</i>tete et cou</div>
+                            {% for examen in listeExamens %}
+                                        {% if examen.machine == "scanner" %}
+                                          {% if examen.region == "tete et cou" %}
+                                              <div class="collapsible-body  examen  red lighten-2 green" machine="{{examen.machine}}" region = "{{examen.region}}" validationRequise="{{examen.validationRequise}}" realise="{{examen.realise}}"><span>{{examen.intitule}}</span></div>
+                                          {% endif %}
+                                        {% endif %}
+                            {% endfor %}
+                        </li>
+                      </ul>   
+                      <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header region"><i class="material-icons">filter_drama</i>osteo</div>
+                            {% for examen in listeExamens %}
+                                        {% if examen.machine == "scanner" %}
+                                          {% if examen.region == "osteo" %}
+                                              <div class="collapsible-body examen  red lighten-2 green" machine="{{examen.machine}}" region = "{{examen.region}}" validationRequise="{{examen.validationRequise}}" realise="{{examen.realise}}"><span>{{examen.intitule}}</span></div>
+                                          {% endif %}
+                                        {% endif %}
+                            {% endfor %}
+                        </li>
+                      </ul>
+                      <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header region"><i class="material-icons">filter_drama</i>autres 
+                          </div>
+                            {% for examen in listeExamens %}
+                                        {% if examen.machine == "scanner" %}
+                                          {% if examen.region == "autre" %}
+                                              <div class="collapsible-body  examen  red lighten-2 green" machine="{{examen.machine}}" region = "{{examen.region}}" validationRequise="{{examen.validationRequise}}" realise="{{examen.realise}}"><span>{{examen.intitule}}</span></div>
+                                          {% endif %}
+                                        {% endif %}
+                            {% endfor %}
+                        </li>
+                      </ul>
+                  </div>
+
+                </li>
+              <!-- echographie -->
+                <li>
+                  <div class="collapsible-header machine"><i class="material-icons right machine">filter_drama</i>echographie </div>
+                    <div class="collapsible-body">
+                      <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header region"><i class="material-icons">filter_drama</i>général</div>
+                            {% for examen in listeExamens %}
+                                        {% if examen.machine == "echographie" %}
+                                          {% if examen.region == "general" %}
+                                              <div class="collapsible-body  examen  red lighten-2 green" machine="{{examen.machine}}" region = "{{examen.region}}" validationRequise="{{examen.validationRequise}}" realise="{{examen.realise}}"><span>{{examen.intitule}}</span></div>
+                                          {% endif %}
+                                        {% endif %}
+                            {% endfor %}
+                        </li>
+                      </ul>   
+                      <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header region"><i class="material-icons">filter_drama</i>doppler</div>
+                            {% for examen in listeExamens %}
+                                        {% if examen.machine == "echographie" %}
+                                          {% if examen.region == "doppler" %}
+                                              <div class="collapsible-body examen  red lighten-2 green" machine="{{examen.machine}}" region = "{{examen.region}}" validationRequise="{{examen.validationRequise}}" realise="{{examen.realise}}"><span>{{examen.intitule}}</span></div>
+                                          {% endif %}
+                                        {% endif %}
+                            {% endfor %}
+                        </li>
+                      </ul>
+                      <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header region"><i class="material-icons">filter_drama</i>pédiatrie 
+                          </div>
+                            {% for examen in listeExamens %}
+                                        {% if examen.machine == "echographie" %}
+                                          {% if examen.region == "pédiatrie" %}
+                                              <div class="collapsible-body  examen  red lighten-2 green" machine="{{examen.machine}}" region = "{{examen.region}}" validationRequise="{{examen.validationRequise}}" realise="{{examen.realise}}"><span>{{examen.intitule}}</span></div>
+                                          {% endif %}
+                                        {% endif %}
+                            {% endfor %}
+                        </li>
+                      </ul>
+                      <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header region"><i class="material-icons">filter_drama</i>ostéo-articulaire 
+                          </div>
+                            {% for examen in listeExamens %}
+                                        {% if examen.machine == "echographie" %}
+                                          {% if examen.region == "osteo" %}
+                                              <div class="collapsible-body  examen  red lighten-2 green" machine="{{examen.machine}}" region = "{{examen.region}}" validationRequise="{{examen.validationRequise}}" realise="{{examen.realise}}"><span>{{examen.intitule}}</span></div>
+                                          {% endif %}
+                                        {% endif %}
+                            {% endfor %}
+                        </li>
+                      </ul>
+                  </div>
+
+                </li>  
+              <!-- gestes -->
+                <li>
+                <div class="collapsible-header machine"><i class="material-icons right machine">filter_drama</i>gestes </div>
+                    <div class="collapsible-body">
+                      <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header region"><i class="material-icons">filter_drama</i>sous scanner</div>
+                            {% for examen in listeExamens %}
+                                        {% if examen.machine == "geste" %}
+                                          {% if examen.region == "sous scanner" %}
+                                              <div class="collapsible-body  examen  red lighten-2 green" machine="{{examen.machine}}" region = "{{examen.region}}" validationRequise="{{examen.validationRequise}}" realise="{{examen.realise}}"><span>{{examen.intitule}}</span></div>
+                                          {% endif %}
+                                        {% endif %}
+                            {% endfor %}
+                        </li>
+                      </ul>   
+                      <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header region"><i class="material-icons">filter_drama</i>sous échographie</div>
+                            {% for examen in listeExamens %}
+                                        {% if examen.machine == "geste" %}
+                                          {% if examen.region == "sous echo" %}
+                                              <div class="collapsible-body examen  red lighten-2 green" machine="{{examen.machine}}" region = "{{examen.region}}" validationRequise="{{examen.validationRequise}}" realise="{{examen.realise}}"><span>{{examen.intitule}}</span></div>
+                                          {% endif %}
+                                        {% endif %}
+                            {% endfor %}
+                        </li>
+                      </ul>
+                      <ul class="collapsible">
+                        <li>
+                          <div class="collapsible-header region"><i class="material-icons">filter_drama</i>sous scopie 
+                          </div>
+                            {% for examen in listeExamens %}
+                                        {% if examen.machine == "geste" %}
+                                          {% if examen.region == "sous radio" %}
+                                              <div class="collapsible-body  examen  red lighten-2 green" machine="{{examen.machine}}" region = "{{examen.region}}" validationRequise="{{examen.validationRequise}}" realise="{{examen.realise}}"><span>{{examen.intitule}}</span></div>
+                                          {% endif %}
+                                        {% endif %}
+                            {% endfor %}
+                        </li>
+                      </ul>
+                  </div>
+              </li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+	
+
+  <button class="btn waves-effect waves-light blue soumission" type="submit" name="action">Submit
+    <i class="material-icons right">send</i>
+  </button> 
+
+<script>
+  
+  //adaptation des examens selon la base de donnée.
+  examens = $('[realise="oui"]')
+  examens.toggleClass("green")
+  
+
+
+
+  //changement de couleur des examens sélectionnés
+  examens = $('.examen');
+  examens.append(" &nbsp &nbsp &nbsp &nbsp <label><input class='validationRequise'  type='checkbox' ></input> <span>validation requise </span></label>")
+  validationRequise = $('[validationRequise="oui"]')
+  validationRequise.children('label').children('input').attr('checked','true')
+  examens.attr("selection", "non")
+  examens.toggleClass("green")
+  examens.click(function() {
+    $(this).toggleClass("green")
+    $(this).attr('selection', 'oui')
+    var checkbox = $(this).children('label').children('input')
+    if (checkbox.is(':checked') == true){
+      $(this).attr('validationRequise','oui')
+    }
+    
+
+
+  });
+
+  
+
+  //récupération des examens réalisés dans une chaine de caractère
+  $('.soumission').click(function() {
+    examensRealises = $('.green');
+    examens = $('.examen')
+    examensNonRealises = examens.not('.green')
+
+    var R = ""
+    var NR = ""
+
+    for (i = 0; i < examensRealises.length; i++) {
+         e = $(examensRealises[i])
+
+         machine = e.attr('machine')
+         region = e.attr('region')
+         intitule = e.children('span:first').text()
+         validationRequise = e.attr('validationRequise')
+         R = R + "XXX"+ machine + "/" + region + "/" + intitule + "/" + validationRequise
+      }
+
+    for (i = 0; i < examensNonRealises.length; i++) {
+         e = $(examensNonRealises[i])
+         machine = e.attr('machine')
+         region = e.attr('region')
+         intitule = e.children('span:first').text()
+         validationRequise = e.attr('validationRequise')
+         NR = NR + "XXX"+ machine + "/" + region + "/" + intitule + "/" + validationRequise
+        }
+
+    alert("validation des changements")
+
+    window.location.replace("enregistrerMesExamens?examensRealises=" + R + "&examensNonRealises=" + NR);
+
+
+  });
+
+</script>
+
+
+{% endblock contenu %}

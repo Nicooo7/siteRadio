@@ -1,0 +1,84 @@
+{% load static %}
+
+<!DOCTYPE html">
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Demandes/accueil</title>
+      
+ 
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+         <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
+
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+
+  </head>
+  
+  <body>
+      
+      
+      <nav class="nav-extended blue">
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo">{{titrePage}} </a>
+              <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                
+                <li><a href="accueil" class="tooltipped" data-position="bottom" data-tooltip="retour accueil"><i class="material-icons">home</i></li></a></li>
+                <li><a href="gererMesExamens" class="tooltipped" data-position="bottom" data-tooltip="gérer mes examens"><i class="material-icons">style_bord</i></li></a></li>
+                <li><a href="quiFaitQuoi" class="tooltipped" data-position="bottom" data-tooltip="rechercher qui fait quoi"><i class="material-icons" >search</i></li></a></li>
+                <li><a href="connexion" class="tooltipped" data-position="bottom" data-tooltip="connexion/deconnexion"><i class="material-icons" >face</i></li></a></li>
+
+                <li> <div> {{user.username}}
+              </ul>
+            </div>
+          
+          <ul class="sidenav" id="mobile-demo">
+                <li><a href="sass.html">Sass</a> 
+                <li><a href="badges.html">Components</a></li>
+                <li><a href="collapsible.html">JavaScript</a></li>
+              </ul>
+            
+        </nav>
+
+   {% block contenu %} 
+
+    <div class="parallax-container">
+      <div class="parallax"><img src="{% static 'Demandes/radiologie-homer.jpg' %}"></div>
+    </div>
+
+    <div class="section white">
+      <div class="row container">
+        <h2 class="header">Radiologie CHAL</h2>
+        <p class="grey-text text-darken-3 lighten-3">Site de gestion des examens du service de radiologie du CHAL</p>
+      </div>
+    </div>
+
+   {% endblock contenu %}  
+      
+    {% block script %}     
+   {% endblock script %} 
+    
+
+    <script>
+         $(document).ready(function(){
+            $('.tooltipped').tooltip();
+            $('.collapsible').collapsible();
+            $('.parallax').parallax();
+          });
+    </script>
+      
+  </body>
+    
+    
+    
+    
+</html>
+
+
+
+

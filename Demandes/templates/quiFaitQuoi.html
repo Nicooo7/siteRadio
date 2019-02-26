@@ -1,0 +1,67 @@
+{% extends "accueil.html" %}
+{% load static %}
+
+
+{% block contenu %}
+
+<div class="section">
+<div class="section">    
+<div class="section">
+    
+
+<body class="grey lighten-2">
+      <div class="row">
+          <div class="col s12">
+            <div class="card white ">
+            <div class="card-content black-text">
+                <span> <h2 class= "blue">QUI FAIT QUOI ? </h2></span>
+
+
+       <table class="striped" id="tableau_patients">
+        <thead>
+          <tr>
+              <th>machine</th>
+              <th>region</th>
+              <th>intitule</th>
+              <th>radiologues réalisants</th>
+              <th> validation nécessaire?</th>
+
+          </tr>
+        </thead>
+
+        <tbody>
+           {% for examen in examens %} 
+          <tr style="color:grey">
+             <td>{{examen.machine|upper}}</td>
+             <td>{{examen.region}}</td>
+             <td>{{examen.intitule}}</td> 
+             <td>{{examen.personnes}}</td> 
+             {% if examen.validationRequise == "oui" %}
+                <td> {{examen.validationRequise}} </td>  
+              {% else %}
+                <td> non </td> 
+             {% endif %}
+          </tr> 
+           {% endfor %}
+        </tbody>
+      </table>
+            </div>
+          </div>
+        </div>
+      </div>
+          
+        
+    </body>
+
+
+
+<script>
+jQuery('#tableau_patients').dataTable({
+        scrollY:        '50vh',
+        scrollCollapse: true,
+        paging:         false
+    } );
+</script>
+
+
+{% endblock contenu %}
