@@ -28,14 +28,27 @@ def accueil(request):
         examens = Examen.objects.filter()
         for examen in examens:
             examen.delete()
-    reinitialiserExamens()
+#reinitialiserExamens()
 
     #creation des utilisateurs
     def creerUtilisateurs():
-        user = User.objects.create_user('Leila', 'leila_chamard@hotmail.com', 'radiologue')
+
+        user = User.objects.create_user('Chamard', 'leila@radiologue.com', 'radiologue')
+        user.save()
+        user = User.objects.create_user('Vignoli','radiologue@hotmail.com', 'radiologue')
+        user.save()
+        user = User.objects.create_user('Rigal', 'radiologue@hotmail.com', 'radiologue')
+        user.save()
+        user = User.objects.create_user('Plateau', 'radiologue@hotmail.com', 'radiologue')
+        user.save()
+        user = User.objects.create_user('Olivier', 'radiologue@hotmail.com', 'radiologue')
         user.save()
 
+
     #creerUtilisateurs()    
+    
+   # user = User.objects.create_user('Bossard', 'radiologue@hotmail.com', 'radiologue')
+   # user.save()
 
     return render(request, 'accueil.html', {"titrePage":"Acceuil"})
 
