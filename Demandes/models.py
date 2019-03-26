@@ -117,7 +117,7 @@ class Demande(models.Model):
     heure= models.DateTimeField(null = True)
     createur = models.ForeignKey(Createur, null=True, on_delete=models.CASCADE)
     validant = models.ForeignKey(Validant, null=True, on_delete=models.CASCADE)
-    
+    commentaires =  models.CharField(max_length=10000, null=True)
 
 
 class Examen(models.Model):
@@ -141,6 +141,8 @@ class Examen(models.Model):
         )
 
     realisant = models.ManyToManyField(User)
+
+    commentaire =  models.CharField(max_length=10000, null=True)
 
     def __str__(self):
         return(self.machine + " " + self.region + " " + self.intitule)

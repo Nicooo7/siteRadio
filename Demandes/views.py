@@ -22,7 +22,14 @@ from django.utils import timezone
 
 
 
+
+
+
+
 def accueil(request):
+
+
+
 
     def reinitialiserExamens():
         examens = Examen.objects.filter()
@@ -83,12 +90,16 @@ def gererMesExamens(request):
 
         liste= []
 
-        def __init__(self, machine, region, intitule, validationRequise = "non", realise="non"):
+        def __init__(self, machine, region, intitule, validationRequise = "non", realise="non", commentaire ="aucun"):
             self.machine = machine
             self.region = region
             self.intitule = intitule
             self.validationRequise = validationRequise
             self.realise = realise
+            self.commentaire = commentaire
+            if machine == "geste":
+                """self.commentaire = self.commentaire + " ; prévoir 48 H de repos et venir accompagné"
+                print("commentaire ajouté")"""
             Exam.liste.append(self)
 
 #IRM:
@@ -206,20 +217,20 @@ def gererMesExamens(request):
     Exam("geste", "sous scanner"," biopsie pulmonaire")
     Exam("geste", "sous scanner"," biopsie osseuse")
     Exam("geste", "sous scanner"," drainage")
-    Exam("geste", "sous scanner"," infiltration C1-C2")
-    Exam("geste", "sous scanner"," infiltration épidurale lombaire")
+    Exam("geste", "sous scanner"," infiltration C1-C2", commentaire = "(= Névralgie d’Arnold) avec du CONTRASTE et de l’HYDROCORTANCYL ")
+    Exam("geste", "sous scanner"," infiltration épidurale lombaire", commentaire ="Avec du CONTRASTE et de l’HYDROCORTANCYL")
     Exam("geste", "sous scanner"," infiltrations sacro-iliaques")
-    Exam("geste", "sous scanner"," infiltrations articulaires postérieures lombaires")
+    Exam("geste", "sous scanner"," infiltrations articulaires postérieures lombaires", commentaire ="articulaires postérieures (=zygapophysaires).Avec du CONTRASTE et de l’HYDROCORTANCYL")
 
     #sous échographie
     Exam("geste", "sous echo"," cytoponction thyroidienne")
     Exam("geste", "sous echo"," cytoponction ganglionnaire")
-    Exam("geste", "sous echo"," infiltration epaule")
-    Exam("geste", "sous echo"," infiltration genou")
-    Exam("geste", "sous echo"," infiltration cheville")
-    Exam("geste", "sous echo"," infiltration poignet")
-    Exam("geste", "sous echo"," infiltration main")
-    Exam("geste", "sous echo"," infiltration hanche")
+    Exam("geste", "sous echo"," infiltration epaule", commentaire ="Xylo, Diprostène", )
+    Exam("geste", "sous echo"," infiltration genou", commentaire ="Xylo, Diprostène.")
+    Exam("geste", "sous echo"," infiltration cheville", commentaire ="Xylo, Diprostène.")
+    Exam("geste", "sous echo"," infiltration poignet", commentaire ="Xylo, Diprostène.")
+    Exam("geste", "sous echo"," infiltration main", commentaire ="Xylo, Diprostène.")
+    Exam("geste", "sous echo"," infiltration hanche", commentaire ="Xylo, Diprostène.")
     Exam("geste", "sous echo"," biopsie foie")
     Exam("geste", "sous echo"," biopsie rein")
     Exam("geste", "sous echo"," drainage collection")
@@ -230,12 +241,12 @@ def gererMesExamens(request):
     Exam("geste", "sous radio"," cystographie")
     Exam("geste", "sous radio"," hysterographie")
     Exam("geste", "sous radio"," transit du grêle")
-    Exam("geste", "sous radio"," infiltration acromio-clav")
-    Exam("geste", "sous radio"," infiltration sous-acromiale")
-    Exam("geste", "sous radio"," infiltration poignet")
-    Exam("geste", "sous radio"," infiltration genou")
-    Exam("geste", "sous radio"," infiltration cheville")
-    Exam("geste", "sous radio"," articulaire postérieure")
+    Exam("geste", "sous radio"," infiltration acromio-clav", commentaire ="Contraste, Xylo, Diporstène.")
+    Exam("geste", "sous radio"," infiltration sous-acromiale", commentaire ="Contraste, Xylo, Diporstène.")
+    Exam("geste", "sous radio"," infiltration poignet", commentaire ="Contraste, Xylo, Diporstène.")
+    Exam("geste", "sous radio"," infiltration genou", commentaire ="Contraste, Xylo, Diporstène.")
+    Exam("geste", "sous radio"," infiltration cheville", commentaire ="Contraste, Xylo, Diporstène.")
+    Exam("geste", "sous radio"," articulaire postérieure", commentaire ="Contraste, Xylo, Diporstène.")
 
 
 
@@ -249,6 +260,17 @@ def gererMesExamens(request):
                         e1.realise = "oui"
                         e1.validationRequise = e2.validationRequise
 
+    """                    
+    examens = Examen.objects.all()
+    for examen in examens:
+        for e in Exam.liste:
+            if examen.machine == e.machine:
+                if examen.region == e.region:
+                    if examen.intitule == e.intitule:
+                        examen.commentaire = e.commentaire
+                        examen.save()
+                        print(examen.commentaire)
+    """
 
     return render(request, 'gererMesExamens.html', {"listeExamens" : listeExamens, "titrePage":"gerer mes examens"})
 
@@ -258,6 +280,7 @@ def quiFaitQuoi(request):
     examens = Examen.objects.all()
     
     for examen in examens:
+        print(examen.commentaire)
         personnes = ""
         for personne in examen.realisant.all():
             personnes = personnes +  personne.username +  ", " 
@@ -290,6 +313,7 @@ def enregistrerMesExamens(request):
         e.save()
         e.realisant.add(request.user)
         e.validationRequise = examen[3]
+        e.commentaire = examen[4]
         e.save()
         #print(e.realisant.all())
 
@@ -298,6 +322,7 @@ def enregistrerMesExamens(request):
         #print("examen non réalisé", examen)
         e = Examen.objects.get_or_create(machine = examen[0], region=examen[1], intitule = examen[2])
         e = e[0]
+        e.commentaire = examen[4]
         e.save()
         e.realisant.remove(request.user)
         e.save()

@@ -25,6 +25,7 @@
               <th>intitule</th>
               <th>radiologues réalisants</th>
               <th> validation nécessaire?</th>
+              <th> commentaire </th>
 
           </tr>
         </thead>
@@ -41,6 +42,7 @@
               {% else %}
                 <td> non </td> 
              {% endif %}
+             <td>{{examen.commentaire}}</td> 
           </tr> 
            {% endfor %}
         </tbody>
