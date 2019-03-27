@@ -292,6 +292,7 @@
     
   //ajout des commentaires:
   $('.commentaires').click(function(){
+      $(this).parent().parent().toggleClass("green")
       commentaire = $(this).parent().parent().attr('commentaire')
       $(this).parent().parent().attr('id','x')
       $('.carteCommentaire').toggle();
@@ -317,7 +318,7 @@
 
     for (i = 0; i < examensRealises.length; i++) {
          e = $(examensRealises[i])
-
+         commentaire = e.attr('commentaire')
          machine = e.attr('machine')
          region = e.attr('region')
          intitule = e.children('span:first').text()

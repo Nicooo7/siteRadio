@@ -7,7 +7,7 @@ from django.template import loader
 #from django.core.exceptions import ObjectDoesNotExist
 
 from .models import *
-from django.contrib.auth.models import* 
+from django.contrib.auth.models import*
 from django.contrib.auth import *
 
 from django.template.response import *
@@ -52,17 +52,17 @@ def accueil(request):
         user.save()
 
 
-    #creerUtilisateurs()    
-    
+    #creerUtilisateurs()
+
    # user = User.objects.create_user('Bossard', 'radiologue@hotmail.com', 'radiologue')
    # user.save()
 
     return render(request, 'accueil.html', {"titrePage":"Acceuil"})
 
 def connexion(request):
-    
+
     error = False
-    
+
     if request.method == 'POST':
         form = AuthentificationForm(request.POST)
         if form.is_valid():
@@ -71,7 +71,7 @@ def connexion(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return render (request, 'accueil.html')  
+                return render (request, 'accueil.html')
             else:
                 error = True
         else:
@@ -81,7 +81,7 @@ def connexion(request):
     form = AuthentificationForm()
 
     titre = "demandes d'examen : page d'authentification"
-     
+
     return render(request, 'authentification.html', {'form': form})
 
 def gererMesExamens(request):
@@ -169,7 +169,7 @@ def gererMesExamens(request):
     Exam("scanner", "osteo","coude")
     Exam("scanner", "osteo","cheville")
     Exam("scanner", "osteo","hanche")
-  
+
 
     #autres
     Exam("scanner", "autre","rachis")
@@ -179,7 +179,7 @@ def gererMesExamens(request):
     Exam("scanner", "autre","angio scanner aorte et MI")
 
 #Echographie
-    
+
     #général
     Exam("echographie", "general","abdominal")
     Exam("echographie", "general","abdomino-pelvienne")
@@ -190,14 +190,14 @@ def gererMesExamens(request):
     Exam("echographie", "general","parties molles indéterminée")
 
     #doppler
-    Exam("echographie", "doppler","artères MI/MS") 
-    Exam("echographie", "doppler","veines MI/MS") 
-    Exam("echographie", "doppler","rénale") 
-    Exam("echographie", "doppler","greffon") 
-    Exam("echographie", "doppler","TSA") 
+    Exam("echographie", "doppler","artères MI/MS")
+    Exam("echographie", "doppler","veines MI/MS")
+    Exam("echographie", "doppler","rénale")
+    Exam("echographie", "doppler","greffon")
+    Exam("echographie", "doppler","TSA")
 
     #pédiatrie
-    Exam("echographie", "pédiatrie","hanches nourrisson") 
+    Exam("echographie", "pédiatrie","hanches nourrisson")
     Exam("echographie", "pédiatrie","moelle")
     Exam("echographie", "pédiatrie","ETF")
     Exam("echographie", "pédiatrie","pleurale")
@@ -250,17 +250,24 @@ def gererMesExamens(request):
 
 
 
-    listeExamens = Exam.liste 
-    MesExamensRealises = Examen.objects.filter(realisant = request.user) 
+    listeExamens = Exam.liste
+    MesExamensRealises = Examen.objects.filter(realisant = request.user)
+    tousLesExamens = Examen.objects.all()
     for e1 in listeExamens :
         for e2 in MesExamensRealises:
             if e1.machine == e2.machine:
                 if e1.region == e2.region:
                     if e1.intitule == e2.intitule:
                         e1.realise = "oui"
-                        e1.validationRequise = e2.validationRequise
 
-    """                    
+    for e1 in listeExamens :
+        for e3 in tousLesExamens:
+            if e1.machine == e3.machine:
+                if e1.region == e3.region:
+                    if e1.intitule == e3.intitule:
+                        e1.validationRequise = e3.validationRequise
+
+    """
     examens = Examen.objects.all()
     for examen in examens:
         for e in Exam.liste:
@@ -278,12 +285,12 @@ def gererMesExamens(request):
 def quiFaitQuoi(request):
 
     examens = Examen.objects.all()
-    
+
     for examen in examens:
         print(examen.commentaire)
         personnes = ""
         for personne in examen.realisant.all():
-            personnes = personnes +  personne.username +  ", " 
+            personnes = personnes +  personne.username +  ", "
         examen.personnes = personnes
 
 
@@ -303,7 +310,7 @@ def enregistrerMesExamens(request):
             examen.delete()
 
 
-    
+
 
     for examen in listeDesExamensRealises[1:]:
         examen = examen.split("/")
@@ -323,12 +330,13 @@ def enregistrerMesExamens(request):
         e = Examen.objects.get_or_create(machine = examen[0], region=examen[1], intitule = examen[2])
         e = e[0]
         e.commentaire = examen[4]
+        e.validationRequise = examen[3]
         e.save()
         e.realisant.remove(request.user)
         e.save()
-        
-  
-    
+
+
+
 
 
     return render(request, "accueil.html")
